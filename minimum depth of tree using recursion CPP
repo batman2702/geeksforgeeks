@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct node
+{
+    int data;
+    node *left,*right;
+};
+struct node *newNode(int data)
+{
+    node *temp=new node;
+    temp->data=data;
+    temp->left=NULL;
+    temp->right=NULL;
+    return temp;
+}
+int mindepth(struct node *root)
+{
+    if(root==NULL)
+    return 0;
+    if(root->left==NULL && root->right==NULL)
+    return 1;
+    if(root->left==NULL)
+    {
+        return mindepth(root->right)+1;
+    }
+    else if(root->right==NULL)
+    {
+        return mindepth(root->left)+1;
+    }
+    else
+    {
+        return 1+min(mindepth(root->left),mindepth(root->right));
+    }
+}
+int main()
+{
+    node *root=newNode(1);
+    root->left        = newNode(2);
+    root->right       = newNode(3);
+    root->left->left  = newNode(4);
+    root->left->right = newNode(5);
+    cout<<mindepth(root)<<endl;
+}
