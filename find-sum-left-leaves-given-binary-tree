@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+struct node 
+{
+    int data;
+    node *left,*right;
+};
+node *newNode(int data)
+{
+    node *temp=new node;
+    temp->data=data;
+    temp->left=NULL;
+    temp->right=NULL;
+    return temp;
+}
+void leafsum(node *root,bool isleft,int *sum)
+{
+    if(root==NULL)
+    return ;
+    if(!root->left && !root->right && isleft)
+    {
+        *sum+=root->data;
+    }
+    leafsum(root->left,1,sum);
+    leafsum(root->right,0,sum);
+}
+int sumleaf(node *root)
+{
+    int sum=0;
+    leafsum(root,0,&sum);
+    return sum;
+}
+int main()
+{
+    node *root=newNode(20);
+     root->left                = newNode(9);
+    root->right               = newNode(49);
+    root->right->left         = newNode(23);
+    root->right->right        = newNode(52);
+    root->right->right->left  = newNode(50);
+    root->left->left          = newNode(5);
+    root->left->right         = newNode(12);
+    root->left->right->right  = newNode(12);
+    cout<<sumleaf(root)<<endl;
+}
