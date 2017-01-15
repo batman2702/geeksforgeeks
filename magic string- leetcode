@@ -1,0 +1,24 @@
+first take a string 
+s="122"
+let assume n=2;
+next build the string and count 1's and return it;
+code:
+#include<bits/stdc++.h>
+using namespace std;
+int magicstring(int n)
+{
+	string s="122";
+	int i=2;
+	while(s.size()<n)
+	{
+		s+=string(s[i++]-'0',s.back()^3);
+	}
+	return count(s.begin(),s.begin()+n,'1');
+}
+int main()
+{
+	int n;
+	cin>>n;
+	cout<<magicstring(n)<<endl;
+}
+Link->http://ideone.com/tlfrXH
