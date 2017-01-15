@@ -1,0 +1,36 @@
+algorithm:
+1) Run a loop for i = 1 to n-1
+       
+   a) Remove common factors
+      new_x /= gcd(i, new_x);
+
+   b) Check if we found first i.
+      if (new_x == 1)
+          break;
+
+2) Return i
+#include<bits/stdc++.h>
+using namespace std;
+int gcd(int a,int b)
+{
+	return b==0?a:gcd(b,a%b);
+}
+int findnum(int n)
+{
+	int i=1;
+	int count=n;
+	for(i=1;i<n;i++)
+	{
+		count/=gcd(i,count);
+		if(count==1)
+		break;
+	}
+	return i;
+}
+int main ()
+{
+	int n;
+	cin>>n;
+	cout<<findnum(n)<<endl;
+}
+link->http://ideone.com/ayAkOm
