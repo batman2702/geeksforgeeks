@@ -1,0 +1,40 @@
+/*
+algorithm:
+->calculate& store last digit by
+prev=n%2;
+n/=2;
+while loop:
+store remaining bits
+curr=n%2;
+if curr==prev
+return false;
+prev=curr;store current bit in prev;
+n/=2;
+code;
+#include <bits/stdc++.h>
+using namespace std;
+bool findpattern(int n)
+{
+	int prev=n%2;
+	n/=2;
+	while(n>0)
+	{
+		int curr=n%2;
+		if(curr==prev)
+			return false;
+		prev=curr;
+		n/=2;
+	}
+	return true;
+}
+int main(int argc, char const *argv[])
+{
+	int n;
+	cin>>n;
+	if(findpattern(n))
+		cout<<"yes";
+	else
+		cout<<"No";
+	return 0;
+}
+http://ideone.com/3et80B ->code
