@@ -1,0 +1,81 @@
+class Node():
+	def __init__(self,data):
+		self.data=data
+		self.next=None 
+class Llist():
+	def __init__(self):
+		self.head=None 
+	def push(self,data):
+		new_node=Node(data)
+		new_node.next=self.head
+		self.head=new_node
+	def append(self,data):
+		new_node=Node(data)
+		temp=self.head
+		if temp==None:
+			new_node.next=self.head
+			self.head=new_node
+			return
+		else:
+			while(temp.next!=None):
+				temp=temp.next
+			temp.next=new_node
+	def insert(self,data,prev):
+		if prev==None:
+			print("empty")
+		else:
+			new_node=Node(data)
+			new_node.next=prev.next
+			prev.next=new_node
+	def deleteelement(self,data):
+		if self.head==None:
+			return
+		else:
+			temp=self.head
+            prev=self.head
+            if temp is not None:
+                if temp.data==data:
+                    self.head=temp.next
+                    del temp
+                    return
+            while(temp.next is not None or temp.data!=data):
+                if temp.data==data:
+                    break
+                else:
+                    prev=temp
+                    temp=temp.next
+            prev.next=temp.next
+            del temp
+	def printlist(self):
+		temp=self.head 
+		while(temp!=None):
+			print(temp.data,end=' ')
+			temp=temp.next
+		
+test=int(input())
+for i in range(test):
+	n,q=map(int,input().split())
+	arr=list(map(int,input().split()))
+	Unread=Llist()
+	for i in range(1,n+1):
+		Unread.append(i)
+	Read=Llist()
+	Trash=Llist()
+	for i in range(0,len(arr),2):
+		if arr[i]==1:
+			Unread.deleteelement(arr[i+1])
+			Read.append(arr[i+1])
+		elif arr[i]==2:
+			Read.deleteelement(arr[i+1])
+			Trash.append(arr[i+1])
+		elif arr[i]==3:
+			Unread.deleteelement(arr[i+1])
+			Trash.append(arr[i+1])
+		elif arr[i]==4:
+			Trash.deleteelement(arr[i+1])
+			Read.append(arr[i+1])
+	print(Unread.printlist())
+	print(Read.printlist())
+	print(Trash.printlist())
+		
+		
